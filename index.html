@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>HonKassif | Vault</title>
     
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='goldGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23BF953F'/%3E%3Cstop offset='50%25' style='stop-color:%23FCF6BA'/%3E%3Cstop offset='100%25' style='stop-color:%23B38728'/%3E%3C/linearGradient%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='4' result='coloredBlur'/%3E%3CfeMerge%3E%3CfeMergeNode in='coloredBlur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width='512' height='512' rx='100' fill='%23050507'/%3E%3Cpath d='M100 130 V380 H150 V280 H250 V380 H300 V130 H250 V230 H150 V130 Z' fill='url(%23goldGrad)'/%3E%3Cpath d='M330 130 L330 380 H380 L450 250 V130 H400' fill='url(%23goldGrad)'/%3E%3Cpath d='M80 400 L200 320 L280 370 L460 140' stroke='%2300f2ff' stroke-width='35' fill='none' stroke-linecap='round' stroke-linejoin='round' filter='url(%23glow)'/%3E%3Cpath d='M460 140 L400 140 M460 140 L460 210' stroke='%2300f2ff' stroke-width='35' stroke-linecap='round' filter='url(%23glow)'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='goldGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23BF953F'/%3E%3Cstop offset='50%25' style='stop-color:%23FCF6BA'/%3E%3Cstop offset='100%25' style='stop-color:%23B38728'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='100' fill='%23050507'/%3E%3Cpath d='M100 130 V380 H150 V280 H250 V380 H300 V130 H250 V230 H150 V130 Z' fill='url(%23goldGrad)'/%3E%3Cpath d='M330 130 L330 380 H380 L450 250 V130 H400' fill='url(%23goldGrad)'/%3E%3C/svg%3E" type="image/svg+xml">
 
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="https://accounts.google.com/gsi/client"></script>
@@ -49,12 +49,14 @@
         /* NAVIGATION ITEMS */
         .nav-item { 
             padding: 15px 20px; color: var(--text-muted); cursor: pointer; 
-            border-radius: 12px; margin-bottom: 8px; font-weight: 600; font-size: 15px; 
+            border-radius: 12px; margin-bottom: 8px; font-weight: 600; font-size: 14px; letter-spacing: 1px;
             display: flex; align-items: center; gap: 15px; transition: 0.2s; 
         }
         .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text-main); }
-        .nav-item.active { background: rgba(0, 242, 255, 0.1); color: var(--brand-glow); border-right: 3px solid var(--brand-glow); }
-        .nav-icon { opacity: 0.7; font-size: 18px; }
+        .nav-item.active { background: rgba(0, 242, 255, 0.08); color: var(--brand-glow); border-right: 3px solid var(--brand-glow); }
+        
+        /* SVG ICON STYLES */
+        .nav-icon-svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
 
         /* VIEW MANAGEMENT */
         .view-section { display: none; animation: fadeIn 0.4s ease; }
@@ -187,21 +189,26 @@
         </div>
         
         <div class="nav-item" onclick="switchView('overview', this)">
-            <span class="nav-icon">🏠</span> OVERVIEW
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> 
+            OVERVIEW
         </div>
         <div class="nav-item active" onclick="switchView('assets', this)">
-            <span class="nav-icon">💎</span> ASSETS
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9z"></path><line x1="10" y1="22" x2="22" y2="9"></line><line x1="2" y1="9" x2="14" y2="22"></line><line x1="12" y1="22" x2="12" y2="9"></line></svg>
+            ASSETS
         </div>
         <div class="nav-item" onclick="switchView('allocation', this)">
-            <span class="nav-icon">🥧</span> ALLOCATION
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+            ALLOCATION
         </div>
         <div class="nav-item" onclick="switchView('performance', this)">
-            <span class="nav-icon">📈</span> PERFORMANCE
+            <svg class="nav-icon-svg" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            PERFORMANCE
         </div>
         
         <div style="margin-top: auto;">
             <div class="nav-item" onclick="location.reload()">
-                <span class="nav-icon">🔒</span> LOCK VAULT
+                <svg class="nav-icon-svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                LOCK VAULT
             </div>
         </div>
     </nav>
@@ -209,7 +216,7 @@
     <div class="wrapper" id="main-app">
         
         <div id="view-overview" class="view-section">
-            <h2 style="font-weight: 300; margin-bottom: 30px;">Welcome back, <strong style="color:var(--brand-glow)">Hon.</strong></h2>
+            <h2 style="font-weight: 300; margin-bottom: 30px; direction: ltr;">Welcome back, <strong style="color:var(--brand-glow)">Oren.</strong></h2>
             <div class="glass-panel" style="padding: 40px; text-align: center; color: var(--text-muted);">
                 DASHBOARD UNDER CONSTRUCTION
             </div>
@@ -493,14 +500,11 @@
             reader.readAsText(input.files[0]);
         }
 
-        // NEW VIEW SWITCHER LOGIC
+        // VIEW SWITCHER LOGIC
         function switchView(viewName, navItem) {
-            // 1. Hide all views
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            // 2. Show target view
             document.getElementById('view-' + viewName).classList.add('active');
             
-            // 3. Update Sidebar Active State
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             if(navItem) navItem.classList.add('active');
         }
