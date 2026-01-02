@@ -40,8 +40,9 @@
             z-index: 1000;
             direction: ltr; 
         }
-        .brand-sm { font-size: 24px; font-weight: 200; letter-spacing: 2px; }
-        .brand-sm strong { font-weight: 800; }
+        /* BRANDING UPDATES */
+        .brand-sm { font-size: 24px; font-weight: 200; letter-spacing: 1px; direction: ltr; }
+        .brand-sm strong { font-weight: 700; }
         .brand-sm span { color: var(--brand-glow); }
 
         .wrapper { max-width: 1600px; margin: auto; padding: 40px; padding-top: 120px; display: none; }
@@ -137,7 +138,7 @@
 
     <div id="login-screen">
         <div class="lock-box">
-            <div class="brand-sm" style="font-size: 40px; margin-bottom: 20px;">HON<strong>KASSIF</strong><span>.</span></div>
+            <div class="brand-sm" style="font-size: 40px; margin-bottom: 20px; direction: ltr;">Hon<strong>Kassif</strong><span>.</span></div>
             <p id="auth-status" style="font-size:12px; color:var(--text-muted);">INITIALIZING SECURE CONNECTION...</p>
             <div id="password-section" style="display:none;">
                 <input type="password" id="system-pass" class="pass-input" placeholder="ENTER MASTER KEY" onkeypress="if(event.keyCode==13) handlePassClick()">
@@ -149,7 +150,7 @@
     </div>
 
     <div class="header-bar" id="app-header" style="display:none;">
-        <div class="brand-sm">HON<strong>KASSIF</strong><span>.</span></div>
+        <div class="brand-sm">Hon<strong>Kassif</strong><span>.</span></div>
         <button onclick="location.reload()" class="btn-glass" style="font-size:12px;">LOCK SESSION</button>
     </div>
 
