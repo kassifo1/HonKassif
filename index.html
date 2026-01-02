@@ -348,22 +348,42 @@
         }
 
         async function confirmAndSync() {
+            // 1. Prepare data
             const rows = Array.from(document.querySelectorAll('#table-body tr')).map(tr => {
                 const currentCols = Array.from(tr.querySelectorAll('input')).map(i => i.value);
                 const originalCols = JSON.parse(tr.dataset.originalValues);
                 let history = JSON.parse(tr.dataset.history);
+                
                 if (currentCols[4] !== originalCols[4] && originalCols[4] !== "") {
                     history.push({ val: originalCols[4], date: originalCols[5] });
                 }
                 return { cols: currentCols, history: history };
             });
+
             const vaultData = { passwordHash: savedVault.passwordHash, rows: rows };
             const metadata = { name: 'OrenPMS_Vault.json', mimeType: 'application/json' };
+
             const form = new FormData();
             form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json'}));
             form.append('file', new Blob([JSON.stringify(vaultData)], {type: 'application/json'}));
-            await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', { method: 'POST', headers: { 'Authorization': 'Bearer ' + accessToken }, body: form });
-            location.reload();
+
+            // 2. Upload
+            await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', { 
+                method: 'POST', 
+                headers: { 'Authorization': 'Bearer ' + accessToken }, 
+                body: form 
+            });
+
+            // 3. UI Update (No Reload)
+            document.getElementById('action-bar').classList.remove('visible');
+            
+            // Mark all rows as "Clean" so the system knows they are saved
+            document.querySelectorAll('#table-body tr').forEach(tr => {
+                const inputs = tr.querySelectorAll('input');
+                const currentVals = Array.from(inputs).map(i => i.value);
+                tr.dataset.originalValues = JSON.stringify(currentVals);
+                tr.classList.remove('dirty');
+            });
         }
 
         function sortTable(colIndex) {
